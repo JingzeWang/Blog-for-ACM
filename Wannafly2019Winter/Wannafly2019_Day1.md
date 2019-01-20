@@ -19,6 +19,43 @@ dp1~10的循环节2520
 
 向上倍增，最后加一个dp反向dp
 
+(队友的大腿是真的粗
+
+```c++
+#include <bits/stdc++.h>
+using namespace std;
+int dp[10200][12][12], a[12][12], vis[10200][12][12], n, m, c, t[12][12], sx, sy, tx, ty; 
+int tt = 0; 
+int main()
+{
+	cin >> n >> m >> c;
+	for(int i = 1; i <= n; i++)
+		for(int j = 1; j <= m; j++)
+			cin >> t[i][j];
+	cin >> sx >> sy >> tx >> ty;
+	vis[0][sx][sy] = 1;
+	while(tt! = -1) 
+	{
+		tt++;
+		for(int i = 1; i <= n; i++)
+			for(int j = 1; j <= m; j++)
+			{
+				if(vis[tt - 1][i][j]) {dp[tt][i][j] = dp[tt - 1][i][j]; vis[tt][i][j] = 1;} 
+				if(vis[tt - 1][i - 1][j]) {dp[tt][i][j] = max(dp[tt - 1][i - 1][j], dp[tt][i][j]); vis[tt][i][j] = 1;} 
+				if(vis[tt - 1][i][j - 1]) {dp[tt][i][j] = max(dp[tt - 1][i][j - 1], dp[tt][i][j]); vis[tt][i][j] = 1;} 
+				if(vis[tt - 1][i + 1][j]) {dp[tt][i][j] = max(dp[tt - 1][i + 1][j], dp[tt][i][j]); vis[tt][i][j] = 1;}
+				if(vis[tt - 1][i][j + 1]) {dp[tt][i][j] = max(dp[tt - 1][i][j + 1], dp[tt][i][j]); vis[tt][i][j] = 1;} 
+				if(tt % t[i][j] == 0 && vis[tt][i][j]) dp[tt][i][j]++;
+			}
+		if(dp[tt][tx][ty] >= c)
+		{
+			cout << tt << endl;
+			return 0; 
+		} 
+	} 
+}
+```
+
 ## C
 
 ### 题解：
