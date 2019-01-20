@@ -34,7 +34,7 @@ int main()
 			cin >> t[i][j];
 	cin >> sx >> sy >> tx >> ty;
 	vis[0][sx][sy] = 1;
-	while(tt! = -1) 
+	while(tt != -1) 
 	{
 		tt++;
 		for(int i = 1; i <= n; i++)
