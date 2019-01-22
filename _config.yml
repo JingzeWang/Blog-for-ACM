@@ -3,6 +3,3 @@ description: 压力马斯内（赞赏）
 show_downloads: false
 google_analytics:
 theme: jekyll-theme-hacker
-mathjax:
-  enable: true
-  per_page: true
