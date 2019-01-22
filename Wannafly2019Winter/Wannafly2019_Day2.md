@@ -1,6 +1,6 @@
 # CCPC-Wannafly Winter Camp 2019 Day2
 
-##A Erase Numbers II
+## A Erase Numbers II
 
 ### 题解：
 
@@ -12,9 +12,9 @@
 unsolved
 ```
 
-##B Erase Numbers I
+## B Erase Numbers I
 
-###题解：
+### 题解：
 
 最大化剩余数字，则需最小化删除数字的长度
 
@@ -42,9 +42,9 @@ unsolved
 
 ```
 
-##H Cosmic Cleaner
+## H Cosmic Cleaner
 
-###题解：
+### 题解：
 
 积分或者球缺体积公式
 $$
