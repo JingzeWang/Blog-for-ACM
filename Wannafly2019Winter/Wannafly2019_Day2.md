@@ -1,3 +1,5 @@
+# CCPC-Wannafly Winter Camp 2019 Day2
+
 ##A Erase Numbers II
 
 ### 题解：
