@@ -62,6 +62,7 @@ unsolved
 ## G
 
 ```c++
+//Time: 27ms Memory: 4MB
 #include <bits/stdc++.h>
 using namespace std;
 int p[100005];
