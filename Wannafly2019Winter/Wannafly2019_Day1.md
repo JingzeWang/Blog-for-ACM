@@ -11,11 +11,12 @@
 
 ### 题解：
 
-dp\[i]\[j]\[k]: i,j表示位置,k表示时间,dp每个位置对应时间的最大糖果数
+> div2版本
 
-div2版本
+dp\[i]\[j]\[k]: i，j表示位置，k表示时间，dp每个位置对应时间的最大糖果数
 
 ```c++
+//Time: 11ms Memory: 14MB
 #include <bits/stdc++.h>
 using namespace std;
 int dp[10200][12][12], a[12][12], vis[10200][12][12], n, m, c, t[12][12], sx, sy, tx, ty; 
@@ -49,13 +50,11 @@ int main()
 	} 
 }
 ```
-div1版本
+> div1版本
 
 dp1~10的循环节2520
 
 向上倍增，最后加一个dp反向dp
-
-(队友的大腿是真的粗
 
 ## C
 
@@ -85,7 +84,73 @@ n<=2一定可行
 
 每座山可以绕过去也可以降下来
 
-spfa
+那么对于每座山，如果其高度大于k+第一座山的高度，那么任意点到它的边权为距离+降低高度的费用
+
+dijkstra或spfa即可
+
+```c++
+//Time: 468ms Memory: 16MB
+#include <bits/stdc++.h>
+using namespace std;
+#define ll long long
+const int M = 1e6 + 10;
+const long long int INF = 0x3f3f3f3f3f3f3f3f;
+int n, m, vis[M];
+ll k, h[M], dis[M], temp;
+int head[M], nxt[M], ver[M], tot;
+ll edge[M];
+priority_queue< pair<ll, int> > pq;
+void add(int x, int y, ll z)
+{
+    nxt[++tot] = head[x];
+    head[x] = tot;
+    ver[tot] = y;
+    edge[tot] = z;
+}
+void dijkstra()
+{
+    for(int i = 1; i <= n; i++) dis[i]=INF;
+    dis[1] = 0;
+    pq.push(make_pair(0, 1));
+    while(!pq.empty())
+    {
+        ll x = pq.top().second;
+        pq.pop();
+        if(vis[x]) continue;
+        vis[x] = 1;
+        for(int i = head[x]; i != -1; i = nxt[i])
+        {
+            int y = ver[i];
+            ll z = edge[i];
+            if(dis[y] > dis[x] + z)
+            {
+                dis[y] = dis[x] + z;
+                pq.push(make_pair(-dis[y], y));
+            }
+        }
+    }
+}
+int main()
+{
+    cin >> n >> m >> k;
+    for(int i = 1; i <= n; ++i) cin >> h[i];
+    k += h[1];
+    memset(head, -1, sizeof(head));
+    while(m--)
+    {
+        int u, v;
+        ll w;
+        cin >> u >> v >> w;
+        if(h[v] >= k) add(u, v, w + (h[v] - k) * (h[v] - k));
+        else add(u, v, w);
+        if(h[u] >= k) add(v, u, w + (h[u] - k) * (h[u] - k));
+        else add(v, u, w);
+    }
+    dijkstra();
+    cout << dis[n];
+    return 0;
+}
+```
 
 ## G
 
