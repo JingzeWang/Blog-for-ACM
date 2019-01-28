@@ -13,7 +13,7 @@
 
 > div2版本
 
-dp\[i]\[j]\[k]: i，j表示位置，k表示时间，dp每个位置对应时间的最大糖果数
+$dp[i][j][k]$: i，j表示位置，k表示时间，dp每个位置对应时间的最大糖果数
 
 ```c++
 //Time: 11ms Memory: 14MB
@@ -60,7 +60,48 @@ dp1~10的循环节2520
 
 ### 题解：
 
-n<=2一定可行
+如果$A$与$B$互质，则$n=1$，直接输出
+
+如果不沪指，则必有$n=2$，此时在前15个质数中寻找解即可
+
+```c++
+//Time: 238ms Memory: 3MB
+#include <bits/stdc++.h>
+using namespace std;
+#define ll long long
+int prime[15] = {2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47};
+ll gcd(ll a, ll b)
+{
+    return b ? gcd(b, a % b) : a;
+}
+int main()
+{
+    ios::sync_with_stdio(0); cin.tie(0); cout.tie(0);
+    int test;
+    cin >> test;
+    while(test--)
+    {
+        ll a, b;
+        cin >> a >> b;
+        if(gcd(a, b) == 1) cout << 1 << endl << a << " " << b << endl;
+        else
+        {
+            for(int i = 0; i < 15; ++i)
+            {
+                ll p = prime[i], c = a - p, d = b - p;
+                if(gcd(c, p) == 1 && gcd(d, p) == 1)
+                {
+                    cout << 2 << endl;
+                    cout << c << " " << p << endl;
+                    cout << p << " " << d << endl;
+                    break;
+                }
+            }
+        }
+    }
+    return 0;
+}
+```
 
 ## D 超难的数学题
 
@@ -172,17 +213,17 @@ i枚举gcd质因子
 
 ### 题解：
 
-d\[i]\[j]前i个数中小于j的个数
+$d[i][j]$前i个数中小于j的个数
 
-f(i)表示最后一个数字是i的序列数
+$f(i)$表示最后一个数字是i的序列数
 
 循环1~i，比i小的数有多少个
 
-f(i) = f(1) + (f(i) + 1) * (中间有多少个数)
+$f(i) = f(1) + (f(i) + 1) * (中间有多少个数)$
 
-中间有多少个数 = d\[i-1]\[pi]-d\[j]\[pj]；
+$中间有多少个数 = d[i-1][pi]-d[j][pj]$；
 
-div1:线段树维护(f\[i] + 1) * (中间有多少个数) 的sumA和sumT
+div1:线段树维护$(f[i] + 1) * (中间有多少个数)$ 的sumA和sumT
 
 ## J 夺宝奇兵
 
