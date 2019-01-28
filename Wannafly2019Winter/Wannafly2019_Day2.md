@@ -4,12 +4,57 @@
 
 ### 题解：
 
-枚举第一个要拆的数，再枚举第二个（？？？）
+先找到数列中最大的数maxn，然后找到该数左边和右边最大的数maxl和maxr，分别和maxn拼接，比较大小
 
-此题爆long long
+特别注意此题爆long long
 
 ```c++
-unsolved
+//Time: 3ms Memory: 3MB
+#include <bits/stdc++.h>
+using namespace std;
+#define ull unsigned long long
+ull a[6005];
+int main()
+{
+    ios::sync_with_stdio(0); cin.tie(0); cout.tie(0);
+    int t;
+    cin >> t;
+    for(int i = 1; i <= t; ++i)
+    {
+        int n, k = -1; ull maxn = 0;
+        cin >> n;
+        for(int j = 0; j < n; ++j)
+        {
+            cin >> a[j];
+            if(a[j] > maxn) maxn = a[j], k = j;
+        }
+        ull maxl = 0, maxr = 0;
+        for(int j = 0; j < k; ++j)
+            if(a[j] > maxl) maxl = a[j];
+        for(int j = k + 1; j < n; ++j)
+            if(a[j] > maxr) maxr = a[j];
+        cout << "Case #" << i << ": ";
+        if(maxl == 0 && maxr == 0) 
+        {
+            cout << maxn << endl;
+            continue;
+        }
+        if(maxl)
+        {
+            ull temp = maxn;
+            while(temp) maxl *= 10, temp /= 10;
+            maxl += maxn;
+        }
+        if(maxr)
+        {
+            ull temp = maxr;
+            while(temp) maxn *= 10, temp /= 10;
+            maxn += maxr;
+        }
+        cout << max(maxl, maxn) << endl;
+    }
+    return 0;
+}
 ```
 
 ## B Erase Numbers I
